@@ -24,6 +24,12 @@ namespace AdvancedRegistrySearch
 
             f.Close();
         }
+        
+        private void listSearch_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            // TODO
+
+        }
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
@@ -40,12 +46,6 @@ namespace AdvancedRegistrySearch
                     }
                 }
             }
-        }
-
-        private void listSearch_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            // TODO
-
         }
     }
 }

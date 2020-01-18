@@ -121,7 +121,7 @@ namespace AdvancedRegistrySearch
         {
             var command = new SQLiteCommand();
             command.Connection = conn;
-            command.CommandText = "SELECT * FROM keys WHERE path LIKE @str OR value LIKE @str";
+            command.CommandText = "SELECT * FROM keys WHERE path LIKE @str OR value LIKE @str ORDER BY path ASC";
             command.Parameters.AddWithValue("@str", String.Format("%{0}%", str));
 
             var list = new List<SearchResultModel>();

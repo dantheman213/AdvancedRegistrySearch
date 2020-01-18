@@ -1,11 +1,10 @@
 ﻿
 using Microsoft.Win32;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading;
 using System.Data.SQLite;
+using System.Data;
 
 namespace AdvancedRegistrySearch
 {
@@ -111,11 +110,46 @@ namespace AdvancedRegistrySearch
                 string k = String.Format("{0}\\{1}", root, value);
                 string v = (root.GetValue(value) ?? "").ToString();
 
-                command.CommandText = "INSERT INTO keys(path, value) VALUES('@k','@v')";
-                command.Parameters.AddWithValue("k", k);
-                command.Parameters.AddWithValue("v", v);
+                command.CommandText = "INSERT INTO keys(path, value) VALUES(@k, @v)";
+                command.Parameters.AddWithValue("@k", k);
+                command.Parameters.AddWithValue("@v", v);
                 command.ExecuteNonQuery();
             }
+        }
+
+        public List<SearchResultModel> getQueryResult(string str)
+        {
+            var command = new SQLiteCommand();
+            command.Connection = conn;
+            command.CommandText = "SELECT * FROM keys WHERE path LIKE @str OR value LIKE @str";
+            command.Parameters.AddWithValue("@str", String.Format("%{0}%", str));
+
+            var list = new List<SearchResultModel>();
+
+            try
+            {
+                SQLiteDataReader queryCommandReader = command.ExecuteReader();
+                DataTable dataTable = new DataTable();
+                dataTable.Load(queryCommandReader);
+
+                if (dataTable != null && dataTable.Rows != null && dataTable.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        list.Add(new SearchResultModel()
+                        {
+                            key = row["path"].ToString(),
+                            value = row["value"].ToString(),
+                        });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            return list;
         }
     }
 }

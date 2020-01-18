@@ -1,6 +1,6 @@
 ﻿namespace AdvancedRegistrySearch
 {
-    partial class Form1
+    partial class FrameLoading
     {
         /// <summary>
         /// Required designer variable.
@@ -28,21 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // Form1
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(142, 66);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(216, 29);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Indexing Registry...";
+            // 
+            // FrameLoading
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Shown += new System.EventHandler(this.Form1_Shown);
+            this.ClientSize = new System.Drawing.Size(506, 156);
+            this.ControlBox = false;
+            this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "FrameLoading";
+            this.ShowInTaskbar = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Loading";
+            this.TopMost = true;
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Label label1;
     }
 }
-

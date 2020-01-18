@@ -10,18 +10,11 @@ using System.Windows.Forms;
 
 namespace AdvancedRegistrySearch
 {
-    public partial class Form1 : Form
+    public partial class FrameLoading : Form
     {
-        public Form1()
+        public FrameLoading()
         {
             InitializeComponent();
-        }
-
-        private void Form1_Shown(object sender, EventArgs e)
-        {
-            var s = new SearchEngine();
-            s.index();
-
         }
     }
 }

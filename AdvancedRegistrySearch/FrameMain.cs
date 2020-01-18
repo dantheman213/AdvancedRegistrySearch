@@ -27,8 +27,21 @@ namespace AdvancedRegistrySearch
         
         private void listSearch_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            // TODO
+            if (listSearch.Items.Count > 0)
+            {
+                if (CLI.isRegeditRunning())
+                {
+                    MessageBox.Show("Please close registry editor before attempting to open another key.", "Unable to open another instance of regedit", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
 
+                string key = listSearch.SelectedItems[0].SubItems[0].Text;
+                var p1 = CLI.runCommand("REG ADD \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Applets\\Regedit\" /f /v \"LastKey\" /d \"" + key + "\"");
+                p1.WaitForExit();
+
+                var p2 = CLI.runCommand("start \"\" regedit");
+                p2.WaitForExit();
+            }
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)

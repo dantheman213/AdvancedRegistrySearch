@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CLI.cs" />
     <Compile Include="FrameLoading.cs">
       <SubType>Form</SubType>
     </Compile>
